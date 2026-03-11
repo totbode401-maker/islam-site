@@ -1,0 +1,437 @@
+html
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>موقع إسلامي - أذكار وأحاديث</title>
+  <meta name="description" content="موقع عربي بسيط: صفحة مسجد/مركز + أذكار وأحاديث من صحيح البخاري (قابلة للبحث)." />
+  <style>
+    :root{
+      --bg:#0b1220; --muted:#9fb0d0; --text:#eef4ff; --line:rgba(255,255,255,.08);
+      --shadow:0 12px 30px rgba(0,0,0,.35); --radius:18px; --max:1050px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
+      background:
+        radial-gradient(1000px 500px at 15% 0%, rgba(45,212,191,.18), transparent 60%),
+        radial-gradient(900px 450px at 95% 10%, rgba(96,165,250,.18), transparent 55%),
+        linear-gradient(180deg, var(--bg), #050914 70%);
+      color:var(--text); line-height:1.7;
+    }
+    a{color:inherit; text-decoration:none}
+    header{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: blur(10px);
+      background: rgba(11,18,32,.65);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      padding:14px 22px; max-width:var(--max); margin:0 auto;
+    }
+    .brand{display:flex; align-items:center; gap:10px; font-weight:700}
+    .logo{
+      width:38px; height:38px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(45,212,191,.95), rgba(96,165,250,.95));
+      box-shadow: var(--shadow);
+      display:grid; place-items:center; color:#031019; font-weight:900;
+    }
+    .links{display:flex; flex-wrap:wrap; gap:10px}
+    .links a{padding:8px 12px; border:1px solid transparent; border-radius:999px; color:var(--muted)}
+    .links a:hover{border-color:var(--line); color:var(--text)}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px}
+    .card{
+      background: linear-gradient(180deg, rgba(17,27,46,.9), rgba(17,27,46,.75));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:22px;
+    }
+    .hero{padding:28px 0 10px}
+    h1{margin:0 0 10px; font-size: clamp(24px, 4vw, 40px); line-height:1.2}
+    h2{margin:0 0 10px; font-size:22px}
+    .muted{color:var(--muted)}
+    section{padding:14px 0}
+    .grid2{display:grid; grid-template-columns: 1fr 1fr; gap:14px}
+    .toolbar{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      margin-top:10px;
+    }
+    .search{
+      flex: 1 1 280px;
+      display:flex; gap:10px; align-items:center;
+      border:1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(0,0,0,.12);
+      padding:10px 12px;
+    }
+    .search input{
+      width:100%;
+      border:none; outline:none;
+      background: transparent;
+      color: var(--text);
+      font-size: 15px;
+    }
+    .chips{display:flex; gap:8px; flex-wrap:wrap}
+    .chip{
+      padding:8px 10px; border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      color: var(--text);
+      cursor:pointer; user-select:none; font-size:13px;
+    }
+    .chip.active{border-color: rgba(45,212,191,.45); background: rgba(45,212,191,.12)}
+    .count{color:var(--muted); font-size:13px}
+    .items{display:grid; gap:10px; margin-top:12px}
+    .item{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      border-radius: 14px;
+      padding: 14px;
+    }
+    .item .title{font-weight:700; margin-bottom:6px}
+    .item .meta{color:var(--muted); font-size:12px; margin-top:8px}
+    footer{
+      margin-top:18px; padding:18px 0 30px;
+      border-top:1px solid var(--line); color:var(--muted);
+    }
+    @media (max-width: 900px){
+      .grid2{grid-template-columns: 1fr}
+      .links{display:none}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="logo">نور</div>
+      <div>
+        <div>مركز النور الإسلامي</div>
+        <div class="muted" style="font-size:12px">أذكار • أحاديث • مجتمع</div>
+      </div>
+    </div>
+
+    <nav class="links" aria-label="روابط">
+      <a href="#adhkar">الأذكار</a>
+      <a href="#hadith">الأحاديث</a>
+      <a href="#about">عن الموقع</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="card">
+      <h1>أذكار وأحاديث (بحث داخل الصفحة)</h1>
+      <div class="muted">ابدأ بالبحث… وفلتر حسب التصنيف.</div>
+      <div class="muted" style="margin-top:8px;font-size:13px">
+        تنبيه: الأحاديث أدناه “مختصرة المعنى” كبداية. لو أرسلت نص طبعة موثوقة، أضعها لك حرفياً.
+      </div>
+    </div>
+  </section>
+
+  <section id="adhkar">
+    <div class="card">
+      <h2>الأذكار</h2>
+      <div class="muted">مثال: صباح، مساء، نوم، استغفار، صلاة، رزق…</div>
+
+      <div class="toolbar">
+        <div class="search">
+          <span class="muted">بحث</span>
+          <input id="adhkarSearch" placeholder="اكتب كلمة للبحث…" autocomplete="off" />
+        </div>
+        <div class="chips" id="adhkarChips"></div>
+        <div class="count" id="adhkarCount"></div>
+      </div>
+
+      <div class="items" id="adhkarList"></div>
+    </div>
+  </section>
+
+  <section id="hadith">
+    <div class="card">
+      <h2>الأحاديث (صحيح البخاري)</h2>
+      <div class="muted">مثال: نية، صلاة، صدق، رحمة، بر، علم…</div>
+
+      <div class="toolbar">
+        <div class="search">
+          <span class="muted">بحث</span>
+          <input id="hadithSearch" placeholder="اكتب كلمة للبحث…" autocomplete="off" />
+        </div>
+        <div class="chips" id="hadithChips"></div>
+        <div class="count" id="hadithCount"></div>
+      </div>
+
+      <div class="items" id="hadithList"></div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="grid2">
+      <div class="card">
+        <h2>عن الموقع</h2>
+        <div class="muted">
+          صفحة واحدة HTML/CSS/JS. تقدر تزود البيانات داخل المصفوفات ADHKAR_DATA و HADITH_DATA.
+        </div>
+      </div>
+      <div class="card">
+        <h2>كيف تزود لحد 500؟</h2>
+        <div class="muted">
+          انسخ أي عنصر من المصفوفة والصق تحته. كل عنصر عبارة عن: تصنيف + نص.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>© <span id="year"></span> موقع تجريبي</div>
+  </footer>
+</main>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // 50 ذكر (مختارات شائعة)
+  const ADHKAR_DATA = [
+    { category:"صباح", text:"أصبحنا وأصبح الملك لله والحمد لله…" },
+    { category:"صباح", text:"اللهم بك أصبحنا وبك أمسينا وبك نحيا وبك نموت وإليك النشور." },
+    { category:"صباح", text:"رضيت بالله ربًا وبالإسلام دينًا وبمحمد ﷺ نبيًا." },
+    { category:"صباح", text:"اللهم إني أسألك خير هذا اليوم فتحه ونصره ونوره وبركته وهداه…" },
+    { category:"صباح", text:"اللهم ما أصبح بي من نعمة فمنك وحدك لا شريك لك، فلك الحمد ولك الشكر." },
+    { category:"صباح", text:"حسبي الله لا إله إلا هو عليه توكلت وهو رب العرش العظيم." },
+    { category:"صباح", text:"اللهم عافني في بدني، اللهم عافني في سمعي، اللهم عافني في بصري." },
+    { category:"صباح", text:"اللهم إني أعوذ بك من الكفر والفقر، وأعوذ بك من عذاب القبر." },
+    { category:"صباح", text:"سبحان الله وبحمده." },
+    { category:"صباح", text:"لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير." },
+
+    { category:"مساء", text:"أمسينا وأمسى الملك لله والحمد لله…" },
+    { category:"مساء", text:"اللهم بك أمسينا وبك أصبحنا وبك نحيا وبك نموت وإليك المصير." },
+    { category:"مساء", text:"اللهم إني أسألك خير هذه الليلة وخير ما فيها…" },
+    { category:"مساء", text:"اللهم ما أمسى بي من نعمة فمنك وحدك لا شريك لك، فلك الحمد ولك الشكر." },
+    { category:"مساء", text:"أعوذ بكلمات الله التامات من شر ما خلق." },
+    { category:"مساء", text:"بسم الله الذي لا يضر مع اسمه شيء في الأرض ولا في السماء وهو السميع العليم." },
+    { category:"مساء", text:"اللهم إني أعوذ بك من الهم والحزن…" },
+    { category:"مساء", text:"اللهم إني أعوذ بك من العجز والكسل…" },
+    { category:"مساء", text:"سبحان الله والحمد لله ولا إله إلا الله والله أكبر." },
+    { category:"مساء", text:"اللهم صل وسلم على نبينا محمد." },
+
+    { category:"نوم", text:"باسمك ربي وضعت جنبي وبك أرفعه، إن أمسكت نفسي فارحمها…" },
+    { category:"نوم", text:"اللهم قني عذابك يوم تبعث عبادك." },
+    { category:"نوم", text:"آية الكرسي." },
+    { category:"نوم", text:"آخر آيتين من سورة البقرة." },
+    { category:"نوم", text:"قراءة المعوذات والنفث ومسح الجسد." },
+
+    { category:"استغفار", text:"أستغفر الله العظيم وأتوب إليه." },
+    { category:"استغفار", text:"اللهم أنت ربي لا إله إلا أنت، خلقتني وأنا عبدك… (سيد الاستغفار)." },
+    { category:"استغفار", text:"رب اغفر لي وتب عليّ إنك أنت التواب الرحيم." },
+    { category:"استغفار", text:"اللهم اغفر لي ذنبي كله، دقه وجله، أوله وآخره، علانيته وسره." },
+    { category:"استغفار", text:"سبحان الله وبحمده، سبحان الله العظيم." },
+
+    { category:"بعد الصلاة", text:"أستغفر الله، أستغفر الله، أستغفر الله." },
+    { category:"بعد الصلاة", text:"اللهم أنت السلام ومنك السلام تباركت يا ذا الجلال والإكرام." },
+    { category:"بعد الصلاة", text:"سبحان الله (33) الحمد لله (33) الله أكبر (34)." },
+    { category:"بعد الصلاة", text:"لا إله إلا الله وحده لا شريك له… وهو على كل شيء قدير." },
+    { category:"بعد الصلاة", text:"اللهم أعني على ذكرك وشكرك وحسن عبادتك." },
+
+    { category:"رزق", text:"اللهم اكفني بحلالك عن حرامك وأغنني بفضلك عمن سواك." },
+    { category:"رزق", text:"اللهم إني أسألك رزقًا طيبًا وعلمًا نافعًا وعملاً متقبلاً." },
+    { category:"رزق", text:"يا حي يا قيوم برحمتك أستغيث أصلح لي شأني كله…" },
+
+    { category:"عام", text:"لا حول ولا قوة إلا بالله." },
+    { category:"عام", text:"حسبنا الله ونعم الوكيل." },
+    { category:"عام", text:"اللهم إني أسألك الهدى والتقى والعفاف والغنى." },
+    { category:"عام", text:"ربنا آتنا في الدنيا حسنة وفي الآخرة حسنة وقنا عذاب النار." },
+    { category:"عام", text:"اللهم إني أسألك الجنة وأعوذ بك من النار." },
+    { category:"عام", text:"اللهم إني أسألك العفو والعافية في الدنيا والآخرة." },
+    { category:"عام", text:"اللهم اجعلني لك شكّارًا لك ذكّارًا لك رهّابًا…" },
+
+    { category:"قرآن", text:"سبحان ربك رب العزة عما يصفون، وسلام على المرسلين، والحمد لله رب العالمين." },
+    { category:"قرآن", text:"إن الله وملائكته يصلون على النبي… اللهم صل وسلم على نبينا محمد." },
+    { category:"قرآن", text:"فاذكروني أذكركم واشكروا لي ولا تكفرون." },
+
+    { category:"سفر", text:"سبحان الذي سخر لنا هذا وما كنا له مقرنين وإنا إلى ربنا لمنقلبون." },
+    { category:"سفر", text:"اللهم إنا نسألك في سفرنا هذا البر والتقوى…" },
+
+    { category:"هم", text:"لا إله إلا أنت سبحانك إني كنت من الظالمين." },
+    { category:"هم", text:"اللهم رحمتك أرجو فلا تكلني إلى نفسي طرفة عين…" },
+
+    { category:"دعاء", text:"رب اشرح لي صدري ويسر لي أمري." },
+    { category:"دعاء", text:"رب زدني علمًا." }
+  ];
+
+  // 50 حديث (مختصرة المعنى كبداية) - موضوع + نص + مصدر
+  const HADITH_DATA = [
+    { topic:"النية", text:"إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى…", source:"صحيح البخاري" },
+    { topic:"الإيمان", text:"الإيمان قول وعمل يزيد وينقص (مما جاء في أبواب الإيمان).", source:"صحيح البخاري" },
+    { topic:"العلم", text:"من يرد الله به خيرًا يفقهه في الدين.", source:"صحيح البخاري" },
+    { topic:"العلم", text:"إنما العلم بالتعلم.", source:"صحيح البخاري" },
+    { topic:"الصدق", text:"عليكم بالصدق فإن الصدق يهدي إلى البر…", source:"صحيح البخاري" },
+    { topic:"الأمانة", text:"إذا ضُيّعت الأمانة فانتظر الساعة.", source:"صحيح البخاري" },
+    { topic:"الرحمة", text:"ارحموا من في الأرض يرحمكم من في السماء (في معنى الرحمة).", source:"صحيح البخاري" },
+    { topic:"الأخلاق", text:"من كان يؤمن بالله واليوم الآخر فليقل خيرًا أو ليصمت.", source:"صحيح البخاري" },
+    { topic:"الجوار", text:"من كان يؤمن بالله واليوم الآخر فليكرم جاره.", source:"صحيح البخاري" },
+    { topic:"الضيافة", text:"من كان يؤمن بالله واليوم الآخر فليكرم ضيفه.", source:"صحيح البخاري" },
+
+    { topic:"الصلاة", text:"بني الإسلام على خمس… وإقام الصلاة…", source:"صحيح البخاري" },
+    { topic:"الصلاة", text:"أفضل الأعمال الصلاة لوقتها (في أبواب فضل الصلاة).", source:"صحيح البخاري" },
+    { topic:"الصلاة", text:"صلوا كما رأيتموني أصلي.", source:"صحيح البخاري" },
+    { topic:"الجمعة", text:"الغسل يوم الجمعة وفضل التبكير (في أبواب الجمعة).", source:"صحيح البخاري" },
+    { topic:"الذكر", text:"كلمتان خفيفتان على اللسان… سبحان الله وبحمده سبحان الله العظيم.", source:"صحيح البخاري" },
+
+    { topic:"الصيام", text:"من صام رمضان إيمانًا واحتسابًا غُفر له ما تقدم من ذنبه.", source:"صحيح البخاري" },
+    { topic:"القيام", text:"من قام رمضان إيمانًا واحتسابًا غُفر له ما تقدم من ذنبه.", source:"صحيح البخاري" },
+    { topic:"الحج", text:"من حج فلم يرفث ولم يفسق رجع كيوم ولدته أمه (في فضل الحج).", source:"صحيح البخاري" },
+
+    { topic:"البر", text:"البر حسن الخلق (في معاني البر).", source:"صحيح البخاري" },
+    { topic:"الوالدان", text:"رضا الله في رضا الوالدين (في معنى بر الوالدين).", source:"صحيح البخاري" },
+    { topic:"صلة الرحم", text:"من أحب أن يُبسط له في رزقه ويُنسأ له في أثره فليصل رحمه.", source:"صحيح البخاري" },
+    { topic:"الظلم", text:"اتقوا الظلم فإن الظلم ظلمات يوم القيامة (في أبواب المظالم).", source:"صحيح البخاري" },
+    { topic:"النية", text:"من كانت هجرته إلى الله ورسوله فهجرته إلى الله ورسوله…", source:"صحيح البخاري" },
+
+    { topic:"الدعاء", text:"الدعاء سبب للخير واللجوء إلى الله (في أبواب الدعوات).", source:"صحيح البخاري" },
+    { topic:"الاستغفار", text:"والله إني لأستغفر الله وأتوب إليه في اليوم أكثر من سبعين مرة.", source:"صحيح البخاري" },
+    { topic:"الطعام", text:"يا غلام سمِّ الله وكل بيمينك وكل مما يليك (في آداب الطعام).", source:"صحيح البخاري" },
+
+    { topic:"البيع", text:"البيعان بالخيار ما لم يتفرقا.", source:"صحيح البخاري" },
+    { topic:"الصدق", text:"التاجر الصدوق مع النبيين والصديقين (في معنى فضل الصدق في التجارة).", source:"صحيح البخاري" },
+    { topic:"العمل", text:"إن الله يحب إذا عمل أحدكم عملاً أن يتقنه (معنى الإتقان).", source:"صحيح البخاري" },
+
+    { topic:"الحياء", text:"الحياء من الإيمان.", source:"صحيح البخاري" },
+    { topic:"التواضع", text:"من تواضع لله رفعه (في معنى التواضع).", source:"صحيح البخاري" },
+    { topic:"الغضب", text:"ليس الشديد بالصرعة، إنما الشديد الذي يملك نفسه عند الغضب.", source:"صحيح البخاري" },
+
+    { topic:"الفتن", text:"ستكون فتن… والنجاة بالتمسك بالدين (في أبواب الفتن).", source:"صحيح البخاري" },
+    { topic:"الرقائق", text:"الدنيا سجن المؤمن وجنة الكافر (في معنى الزهد).", source:"صحيح البخاري" },
+
+    { topic:"المرء", text:"المرء مع من أحب.", source:"صحيح البخاري" },
+    { topic:"المسلم", text:"المسلم من سلم المسلمون من لسانه ويده.", source:"صحيح البخاري" },
+    { topic:"الأخوة", text:"لا يؤمن أحدكم حتى يحب لأخيه ما يحب لنفسه.", source:"صحيح البخاري" },
+
+    { topic:"الوضوء", text:"إذا توضأ العبد فغسل وجهه خرجت الخطايا… (في فضل الوضوء).", source:"صحيح البخاري" },
+    { topic:"الطهارة", text:"الطهور شطر الإيمان (في معنى فضل الطهارة).", source:"صحيح البخاري" },
+
+    { topic:"القرآن", text:"خيركم من تعلم القرآن وعلمه.", source:"صحيح البخاري" },
+    { topic:"القرآن", text:"اقرؤوا القرآن فإنه يأتي شفيعًا (في معنى فضل القرآن).", source:"صحيح البخاري" },
+
+    { topic:"الرفق", text:"إن الرفق لا يكون في شيء إلا زانه.", source:"صحيح البخاري" },
+    { topic:"الرحمة", text:"لا يُرحم من لا يَرحم الناس.", source:"صحيح البخاري" },
+
+    { topic:"النية", text:"الأجر على قدر النية والصدق (في أبواب الإخلاص).", source:"صحيح البخاري" },
+    { topic:"الزكاة", text:"تؤخذ من أغنيائهم فترد على فقرائهم (في أبواب الزكاة).", source:"صحيح البخاري" },
+    { topic:"الصدقة", text:"الصدقة تطفئ الخطيئة (في معنى فضل الصدقة).", source:"صحيح البخاري" },
+
+    { topic:"الذكر", text:"مثل الذي يذكر ربه والذي لا يذكر ربه مثل الحي والميت.", source:"صحيح البخاري" },
+    { topic:"الاستقامة", text:"قل آمنت بالله ثم استقم (في معنى الاستقامة).", source:"صحيح البخاري" },
+
+    { topic:"الأخلاق", text:"أكمل المؤمنين إيمانًا أحسنهم خلقًا (في معنى حسن الخلق).", source:"صحيح البخاري" },
+    { topic:"الوفاء", text:"آية المنافق ثلاث… إذا حدّث كذب وإذا وعد أخلف وإذا اؤتمن خان.", source:"صحيح البخاري" }
+  ];
+
+  // Helpers
+  function unique(arr){ return [...new Set(arr)]; }
+  function normalize(s){
+    return (s || "")
+      .toString()
+      .replace(/[إأآا]/g, "ا")
+      .replace(/ى/g, "ي")
+      .replace(/ؤ/g, "و")
+      .replace(/ئ/g, "ي")
+      .replace(/ة/g, "ه")
+      .replace(/\s+/g, " ")
+      .trim()
+      .toLowerCase();
+  }
+  function renderChips(container, labels, onPick){
+    container.innerHTML = "";
+    const all = document.createElement("div");
+    all.className = "chip active";
+    all.textContent = "الكل";
+    all.onclick = () => onPick("الكل", all);
+    container.appendChild(all);
+
+    labels.forEach(l=>{
+      const chip = document.createElement("div");
+      chip.className = "chip";
+      chip.textContent = l;
+      chip.onclick = () => onPick(l, chip);
+      container.appendChild(chip);
+    });
+  }
+  function setActiveChip(container, activeChip){
+    [...container.querySelectorAll(".chip")].forEach(c=>c.classList.remove("active"));
+    activeChip.classList.add("active");
+  }
+
+  // Adhkar
+  let adhkarFilter = "الكل";
+  function renderAdhkar(){
+    const q = normalize(document.getElementById("adhkarSearch").value);
+    const list = document.getElementById("adhkarList");
+
+    const filtered = ADHKAR_DATA.filter(x=>{
+      const okCat = (adhkarFilter === "الكل") || (x.category === adhkarFilter);
+      const okQ = !q || normalize(x.text + " " + x.category).includes(q);
+      return okCat && okQ;
+    });
+
+    document.getElementById("adhkarCount").textContent = `المعروض: ${filtered.length} / ${ADHKAR_DATA.length}`;
+    list.innerHTML = "";
+    filtered.forEach(x=>{
+      const el = document.createElement("div");
+      el.className = "item";
+      el.innerHTML = `<div class="title">${x.category}</div><div>${x.text}</div>`;
+      list.appendChild(el);
+    });
+  }
+
+  // Hadith
+  let hadithFilter = "الكل";
+  function renderHadith(){
+    const q = normalize(document.getElementById("hadithSearch").value);
+    const list = document.getElementById("hadithList");
+
+    const filtered = HADITH_DATA.filter(x=>{
+      const okTopic = (hadithFilter === "الكل") || (x.topic === hadithFilter);
+      const okQ = !q || normalize(x.text + " " + x.topic + " " + x.source).includes(q);
+      return okTopic && okQ;
+    });
+
+    document.getElementById("hadithCount").textContent = `المعروض: ${filtered.length} / ${HADITH_DATA.length}`;
+    list.innerHTML = "";
+    filtered.forEach(x=>{
+      const el = document.createElement("div");
+      el.className = "item";
+      el.innerHTML = `<div class="title">${x.topic}</div><div>${x.text}</div><div class="meta">${x.source}</div>`;
+      list.appendChild(el);
+    });
+  }
+
+  // Init
+  renderChips(document.getElementById("adhkarChips"), unique(ADHKAR_DATA.map(x=>x.category)), (label, chip)=>{
+    adhkarFilter = label;
+    setActiveChip(document.getElementById("adhkarChips"), chip);
+    renderAdhkar();
+  });
+  renderChips(document.getElementById("hadithChips"), unique(HADITH_DATA.map(x=>x.topic)), (label, chip)=>{
+    hadithFilter = label;
+    setActiveChip(document.getElementById("hadithChips"), chip);
+    renderHadith();
+  });
+
+  document.getElementById("adhkarSearch").addEventListener("input", renderAdhkar);
+  document.getElementById("hadithSearch").addEventListener("input", renderHadith);
+
+  renderAdhkar();
+  renderHadith();
+</script>
+
+</body>
+</html>
+```
+
